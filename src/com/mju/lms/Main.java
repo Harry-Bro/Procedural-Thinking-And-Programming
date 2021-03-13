@@ -1,41 +1,42 @@
 package com.mju.lms;
 
-import java.util.Scanner;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
 
-    private Scanner sc = new Scanner(System.in);
+    private Integer[] baseDecimal = { 345, 125, 56, 4592 };
+    private String[] hexadecimal = { "aa2", "34f", "3e", "245d" };
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, InstantiationException {
         Main main = new Main();
-        float[] nums = main.getNums(5);
-        float sum = main.sum(nums);
-        float average = main.average(nums);
+        List<Integer> toBinaryString = main.convert(main.baseDecimal, Integer.class.getMethod("toBinaryString", int.class));
+        List<Integer> toHexString = main.convert(main.baseDecimal, Integer.class.getMethod("toHexString", int.class));
 
-        System.out.println("======= Scanner =======");
-        System.out.println("Sum is " + sum);
-        System.out.println("Average is " + average);
+        List<String> toBaseDecimal = main.convert(main.hexadecimal, Main.class.getMethod("toBaseDecimal", String.class));
+        List<Object> toBinaryString2 = main.convert(toBaseDecimal.toArray(), Integer.class.getMethod("toBinaryString", int.class));
+
+        for (int i = 0; i < toBinaryString.size(); i++)
+            System.out.printf("%s: Ob = %s, Ox = %s\n", main.baseDecimal[i], toBinaryString.get(i), toHexString.get(i));
+        System.out.println();
+        for (int i = 0; i < toBaseDecimal.size(); i++)
+            System.out.printf("%s: Dec = %s, Ob = %s\n", main.hexadecimal[i], toBaseDecimal.get(i), toBinaryString2.get(i));
+
     }
 
-    private float[] getNums(int size) {
-        float[] num = new float[size];
-        for (int i=0; i<5; i++)
-            num[i] = sc.nextFloat();
+    @SuppressWarnings("unchecked")
+    private <T> List<T> convert(T[] nums, Method method) throws InvocationTargetException, IllegalAccessException {
+        List<T> list = new ArrayList<>();
+        for (int i = 0; i < nums.length; i++)
+            list.add((T) method.invoke(null, nums[i]));
 
-        return num;
+        return list;
     }
 
-    public float sum(float[] nums) {
-        float result = 0f;
-        for (int i=0; i<nums.length; i++)
-            result += nums[i];
-
-        return result;
-    }
-
-    public float average(float[] nums) {
-        float sum = sum(nums);
-        return sum / nums.length;
+    public static int toBaseDecimal(String num) {
+        return Integer.parseInt(num, 16);
     }
 
 }
