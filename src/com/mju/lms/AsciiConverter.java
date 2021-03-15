@@ -9,11 +9,22 @@ public class AsciiConverter {
     private boolean isInteger = false;
     private boolean isFloat = false;
     private boolean isString = false;
+    private int enterKey;
 
     public void start() throws IOException {
+        osCheck();
         setCodes();
         verifyType();
         printAscii();
+    }
+
+    private void osCheck() {
+        String os = System.getProperty("os.name").toLowerCase();
+        if (os.contains("win")) {
+            this.enterKey = 12;
+        } else if (os.contains("mac")) {
+            this.enterKey = 10;
+        }
     }
 
     public void setCodes() throws IOException {
@@ -22,9 +33,9 @@ public class AsciiConverter {
 
         System.out.println("정수, 실수, 영문자 중 하나의 Type으로만 입력해주세요.");
         System.out.print("input: ");
-        while (!(read == 10)) {
+        while (!(read == this.enterKey)) {
             read = System.in.read();
-            if (read != 10)
+            if (read != this.enterKey)
                 codes.add(read);
         }
     }
@@ -87,4 +98,5 @@ public class AsciiConverter {
             System.out.printf("Result - 정수: %s", result);
         }
     }
+
 }
