@@ -31,7 +31,7 @@ public class AsciiConverter {
         this.codes = new ArrayList<>();
         int read = 0;
 
-        System.out.println("정수, 실수, 영문자 중 하나의 Type으로만 입력해주세요.");
+        System.out.println("정수, 실수, 문자 중 하나의 Type으로만 입력해주세요.");
         System.out.print("input: ");
         while (!(read == this.enterKey)) {
             read = System.in.read();
@@ -55,7 +55,7 @@ public class AsciiConverter {
                     throw new IllegalArgumentException("소수점은 하나만 작성해주세요.");
             }
 
-            if (code > 64 && code < 91 || code >96 && code < 123)
+            if (!(code > 47 && code < 58) && !isFloat)
                 isString = true;
 
         }
@@ -74,17 +74,15 @@ public class AsciiConverter {
         } else if (isFloat) {
             double result = 0;
             int place = 0;
-            for (int i = 0; i < codes.size(); i++) {
+            int multiplier = 1;
+            for (int i = codes.size() - 1; i >= 0; i--) {
                 if (codes.get(i) != 46) {
-                    result += (codes.get(i) - 48) * Math.pow(10, codes.size() - i - 2);
+                    result += (codes.get(i) - 48) * multiplier;
+                    multiplier *= 10;
                 } else {
                     place = i;
-                    break;
                 }
             }
-
-            for (int i = place + 1; i < codes.size(); i++)
-                result += (codes.get(i) - 48) * Math.pow(10, codes.size() - i - 1);
 
             for (int i = 0; i < place; i++)
                 result *= 0.1;
@@ -92,8 +90,11 @@ public class AsciiConverter {
             System.out.printf("Result - 실수: %s", result);
         } else {
             int result = 0;
-            for (int i = 0; i < codes.size(); i++)
-                result += (codes.get(i) - 48) * Math.pow(10, codes.size() - i - 1);
+            int multiplier = 1;
+            for (int i = codes.size() - 1; i >= 0; i--) {
+                result += (codes.get(i) - 48) * multiplier;
+                multiplier *= 10;
+            }
 
             System.out.printf("Result - 정수: %s", result);
         }
