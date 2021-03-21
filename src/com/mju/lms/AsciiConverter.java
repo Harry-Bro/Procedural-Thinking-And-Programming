@@ -99,5 +99,4 @@ public class AsciiConverter {
             System.out.printf("Result - 정수: %s", result);
         }
     }
-
 }
