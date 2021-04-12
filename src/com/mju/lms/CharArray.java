@@ -15,16 +15,18 @@ public class CharArray {
     }
 
     // methods
-    public char[] read() throws IOException {
+    public void read() throws IOException {
         this.length = 0;
-        this.buffer[length] = (char) System.in.read();
-        while (this.buffer[length] != 10) {
+        char input = (char) System.in.read();
+        // 0x20 = space
+        // 0x7E = ~ tilide
+        while (input >= 0x20 && input <= 0x7E) {
+            this.buffer[length] = input;
             length++;
-            this.buffer[length] = (char) System.in.read();
+            input = (char) System.in.read();
         }
 
         this.buffer[length] = 0;
-        return this.buffer;
     }
 
     public int charToInt() throws IOException {
@@ -38,5 +40,7 @@ public class CharArray {
         return result;
     }
 
-
+    public int getLength() {
+        return length;
+    }
 }
