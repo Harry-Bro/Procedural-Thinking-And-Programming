@@ -18,13 +18,15 @@ public class VHwewonDeungrok {
         // 사용자 정보 입력받아 oHwewon에 저장.
         System.out.print("학번을 입력해주세요. ");
         int id = Integer.parseInt(sc.nextLine());
+        System.out.print("비밀번호를 입력해주세요. ");
+        String password = sc.nextLine();
         System.out.print("이름을 입력해주세요. ");
         String name = sc.nextLine();
         System.out.print("주소를 입력해주세요. ");
         String address = sc.nextLine();
         System.out.print("학과 번호를 입력해주세요. ");
-        int hwakgwa = sc.nextInt();
-        OHwewon oHwewon = new OHwewon(id, name, address, hwakgwa);
+        int hwakgwa = Integer.parseInt(sc.nextLine());
+        OHwewon oHwewon = new OHwewon(id, password, name, address, hwakgwa);
 
         this.cHwewonDeungrok.saveHwewon(oHwewon);
     }

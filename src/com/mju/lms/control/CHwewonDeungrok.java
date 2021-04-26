@@ -1,22 +1,22 @@
 package com.mju.lms.control;
 
-import com.mju.lms.dataAccessObject.DHwewonDeungrok;
+import com.mju.lms.dataAccessObject.DHwewon;
 import com.mju.lms.valueObject.OHwewon;
 
 public class CHwewonDeungrok {
 
-    private DHwewonDeungrok dHwewonDeungrok;
+    private DHwewon dHwewon;
 
     public CHwewonDeungrok() {
-        this.dHwewonDeungrok = new DHwewonDeungrok();
+        this.dHwewon = new DHwewon();
     }
 
     public OHwewon readHwewon() {
-        return this.dHwewonDeungrok.read();
+        return null;
     }
 
     public void saveHwewon(OHwewon oHwewon) {
-        this.dHwewonDeungrok.save(oHwewon);
+        this.dHwewon.save(oHwewon);
     }
 
 }

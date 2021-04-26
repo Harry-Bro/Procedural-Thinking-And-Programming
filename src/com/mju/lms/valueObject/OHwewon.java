@@ -5,6 +5,7 @@ import com.mju.lms.model.MHwewon;
 public class OHwewon {
 
     private int id;
+    private String password;
     private String name;
     private String address;
     private int hwakgwa;
@@ -12,8 +13,9 @@ public class OHwewon {
     public OHwewon() {
     }
 
-    public OHwewon(int id, String name, String address, int hwakgwa) {
+    public OHwewon(int id, String password, String name, String address, int hwakgwa) {
         this.id = id;
+        this.password = password;
         this.name = name;
         this.address = address;
         this.hwakgwa = hwakgwa;
@@ -52,7 +54,7 @@ public class OHwewon {
     }
 
     public MHwewon toEntity() {
-        return new MHwewon(this.getId(), this.getName(), this.getAddress(), this.getHwakgwa());
+        return new MHwewon(this.getId(), this.password, this.getName(), this.getAddress(), this.getHwakgwa());
     }
 
 }
