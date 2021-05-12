@@ -2,18 +2,18 @@ package com.mju.lms.valueObject;
 
 import com.mju.lms.model.MHwewon;
 
-public class OHwewon {
+public class OHwewon extends OModel {
 
-    private int id;
+    private String id;
     private String password;
     private String name;
     private String address;
-    private int hwakgwa;
+    private String hwakgwa;
 
     public OHwewon() {
     }
 
-    public OHwewon(int id, String password, String name, String address, int hwakgwa) {
+    public OHwewon(String id, String password, String name, String address, String hwakgwa) {
         this.id = id;
         this.password = password;
         this.name = name;
@@ -21,12 +21,20 @@ public class OHwewon {
         this.hwakgwa = hwakgwa;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getName() {
@@ -45,11 +53,11 @@ public class OHwewon {
         this.address = address;
     }
 
-    public int getHwakgwa() {
+    public String getHwakgwa() {
         return hwakgwa;
     }
 
-    public void setHwakgwa(int hwakgwa) {
+    public void setHwakgwa(String hwakgwa) {
         this.hwakgwa = hwakgwa;
     }
 
@@ -57,4 +65,11 @@ public class OHwewon {
         return new MHwewon(this.getId(), this.password, this.getName(), this.getAddress(), this.getHwakgwa());
     }
 
+//    public void set(MHwewon mHwewon) {
+//        this.id = mHwewon.getId();
+//        this.password = mHwewon.getPassword();
+//        this.name = mHwewon.getName();
+//        this.address = mHwewon.getAddress();
+//        this.hwakgwa = mHwewon.getHwakgwa();
+//    }
 }

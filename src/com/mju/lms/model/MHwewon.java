@@ -1,16 +1,21 @@
 package com.mju.lms.model;
 
+import com.mju.lms.valueObject.OLecture;
+
 import java.io.PrintWriter;
 
-public class MHwewon {
+public class MHwewon extends MModel {
 
-    private int id;
+    private String id;
     private String password;
     private String name;
     private String address;
-    private int hwakgwa;
+    private String hwakgwa;
 
-    public MHwewon(int id, String password, String name, String address, int hwakgwa) {
+    public MHwewon() {
+    }
+
+    public MHwewon(String id, String password, String name, String address, String hwakgwa) {
         this.id = id;
         this.password = password;
         this.name = name;
@@ -18,8 +23,16 @@ public class MHwewon {
         this.hwakgwa = hwakgwa;
     }
 
-    public int getId() {
+    public void save(PrintWriter printWriter, OLecture oLecture) {
+        printWriter.println(oLecture.toString());
+    }
+
+    public String getId() {
         return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getPassword() {
@@ -34,7 +47,7 @@ public class MHwewon {
         return address;
     }
 
-    public int getHwakgwa() {
+    public String getHwakgwa() {
         return hwakgwa;
     }
 
@@ -43,7 +56,4 @@ public class MHwewon {
         return id + "\n" + password + "\n" + name + "\n" + address + "\n" + hwakgwa;
     }
 
-    public void save(PrintWriter printWriter) {
-        printWriter.println(this.toString());
-    }
 }

@@ -12,7 +12,14 @@ public class CLogin {
         this.dHwewon = new DHwewon();
     }
 
-    public OHwewon login(OLogin oLogin) {
-        return dHwewon.login(oLogin);
+    public OHwewon validate(OLogin oLogin) {
+        OHwewon oHwewon = this.dHwewon.read(oLogin.getId());
+        if (oHwewon != null) {
+            if (oLogin.getPassword().equals(oHwewon.getPassword())) {
+                return oHwewon;
+            }
+        }
+        return null;
     }
+
 }
