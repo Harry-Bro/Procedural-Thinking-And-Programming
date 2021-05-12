@@ -11,6 +11,7 @@ public class VInitial {
     private VHwewonJungBo vHwewonJungBo;
     private VSugangsincheong vSugangsincheong;
     private VJanbaguni vJanbaguni;
+    private VSincheong vSincheong;
     private Scanner sc;
     private OHwewon loggedIn;
 
@@ -52,6 +53,9 @@ public class VInitial {
                 } else if (input.equals("3")) {
                     this.vJanbaguni = new VJanbaguni(this.sc, loggedIn);
                     this.vJanbaguni.show();
+                } else if (input.equals("4")) {
+                    this.vSincheong = new VSincheong(this.sc, loggedIn);
+                    this.vSincheong.show();
                 } else {
                     break;
                 }

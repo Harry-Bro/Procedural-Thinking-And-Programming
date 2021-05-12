@@ -26,8 +26,27 @@ public class CHwewon {
         this.dHwewon.save("./user/miridamgi/" + oHwewon.getId() + ".txt", oLecture.toEntity());
     }
 
-    public Vector<OLecture> readJanbaguni(OHwewon oHwewon) {
+    public void saveSincheong(OHwewon oHwewon, OLecture oLecture) {
+        this.dHwewon.save("./user/sincheong/" + oHwewon.getId() + ".txt", oLecture.toEntity());
+    }
+
+    public Vector<OLecture> readMiridamgi(OHwewon oHwewon) {
         return this.dHwewon.readAll("./user/miridamgi/" + oHwewon.getId() + ".txt");
     }
 
+    public Vector<OLecture> readSinCheong(OHwewon oHwewon) {
+        return this.dHwewon.readAll("./user/sincheong/" + oHwewon.getId() + ".txt");
+    }
+
+    public void removeMiridamgi(OHwewon oHwewon, OLecture oLecture) {
+        Vector<OLecture> janbaguniList = readMiridamgi(oHwewon);
+        janbaguniList.remove(oLecture);
+        this.dHwewon.remove("./user/miridamgi/" + oHwewon.getId() + ".txt", janbaguniList);
+    }
+
+    public void removeSincheong(OHwewon oHwewon, OLecture oLecture) {
+        Vector<OLecture> sinCheongList = readSinCheong(oHwewon);
+        sinCheongList.remove(oLecture);
+        this.dHwewon.remove("./user/sincheong/" + oHwewon.getId() + ".txt", sinCheongList);
+    }
 }

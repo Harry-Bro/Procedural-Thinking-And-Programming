@@ -38,11 +38,13 @@ public class VSugangsincheong {
         System.out.println("미리담기(1) 수강신청(2) 종료(3)");
         String input = this.sc.next();
         if (input.equals("1")) {
-            if (this.cHwewon.readJanbaguni(this.loggedIn).contains(oLecture))
+            if (this.cHwewon.readMiridamgi(this.loggedIn).contains(oLecture))
                 System.out.println("이미 장바구니에 담긴 강좌입니다.");
             else this.cHwewon.saveMiridamgi(this.loggedIn, oLecture);
         } else if (input.equals("2")) {
-
+            if (this.cHwewon.readSinCheong(this.loggedIn).contains(oLecture))
+                System.out.println("이미 수강 중인 강좌입니다.");
+            else this.cHwewon.saveSincheong(this.loggedIn, oLecture);
         }
     }
 

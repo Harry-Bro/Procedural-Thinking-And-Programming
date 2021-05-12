@@ -16,8 +16,8 @@ public class DHwewon {
     public DHwewon() {
     }
 
-    public void save(String pathname, MModel oModel) {
-        File file = new File(pathname);
+    public void save(String pathName, MModel oModel) {
+        File file = new File(pathName);
         try (PrintWriter printWriter = new PrintWriter(new FileWriter(file, StandardCharsets.UTF_8, true))) {
             oModel.save(printWriter);
         } catch (IOException e) {
@@ -25,6 +25,17 @@ public class DHwewon {
         }
 
         System.out.println("저장 완료");
+    }
+
+    public void remove(String pathName, Vector<OLecture> oModels) {
+        File file = new File(pathName);
+        try (PrintWriter printWriter = new PrintWriter(new FileWriter(file, StandardCharsets.UTF_8))) {
+            for (OLecture oLecture : oModels) {
+                oLecture.toEntity().save(printWriter);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public OHwewon read(String id) {
@@ -45,8 +56,8 @@ public class DHwewon {
         return null;
     }
 
-    public Vector<OLecture> readAll(String pathname) {
-        File file = new File(pathname);
+    public Vector<OLecture> readAll(String pathName) {
+        File file = new File(pathName);
         Vector<OLecture> indices = new Vector<>();
         try {
             BufferedReader bufferedReader = new BufferedReader(
@@ -59,7 +70,12 @@ public class DHwewon {
                 indices.add(oLecture);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            try (PrintWriter printWriter = new PrintWriter(new FileWriter(file, StandardCharsets.UTF_8, true))) {
+                printWriter.print("");
+            } catch (IOException e2) {
+                e2.printStackTrace();
+            }
         }
 
         return indices;
